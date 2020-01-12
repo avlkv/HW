@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block body1 %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <div id="myModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+          <div class="modal-dialog" style="width: 400px">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h2 class="modal-title" style="font-size: 30px">Добавление нового отзыва</h2>
+                        </div>
+                        <div class="modal-body">
+                            <form method="POST" enctype="multipart/form-data">
+                                <div class="add-form container">
+                                    {% csrf_token %}
+                                    <div class="course_add">
+                                        <label for="book_name">Название книги:</label>
+                                        <div class="data-and-error">
+                                            {{book.name_book}}
+                                        </div>
+                                    </div>
+                                    <div class="course_add">
+                                        <label for="username">Пользователь:</label>
+                                        <div class="data-and-error">
+                                            {{ request.user.username }}
+                                        </div>
+                                    </div>
+                                    <div class="course_add">
+                                        <label for="review">Отзыв:</label>
+                                        <div class="data-and-error">
+                                            <input type="text" name="review" maxlength="255"/>
+                                        </div>
+                                    </div>
+
+                                    <br><button type="submit" id="btn_add" style="margin-left: 5%">Добавить отзыв</button>
+                                    <br>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                        </div>
+                    </div>
+          </div>
+      </div>
+    </div>
+<div id="header1">
+        <div class="container">
+            <div class="row centered">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <h1 style="font-size: 60px"><br>{{ book.name_book }}<br></h1>
+                    {% if book.photo %}
+                                <td><img src="{{book.photo.url}}" width="300" height="300"></td>
+                            {% endif %}
+                    <table class="table">
+                        <thead class="thead">
+                        <tr href="{% url 'list_books_url'%}">
+                            <td>Название</td>
+                            <td>Жанр</td>
+                            <td>Автор</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{{book.name_book}}</td>
+                            <td>{{book.genre_book}}</td>
+                            <td>{{book.writer_book}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                <table class="table table-hover table-inverse">
+                        <tr >
+                            <td>Читатель</td>
+                            <td>Отзыв</td>
+                        </tr>
+                    {%  for user in review %}
+                    <tr>
+                    <td>{{ user.username }}</td>
+                        <td>{{ user.review }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                </div>
+            <button type="button" class="btn ui-button-icon-primary" data-toggle="modal" data-target="#myModal">Добавить отзыв</button>
+            </div>
+        </div>
+</div>
+{% endblock %}

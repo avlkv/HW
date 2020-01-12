@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block body1 %}
+    <div id="header1">
+        <div class="container">
+            <div class="row centered">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <h1><br>Таблица книги<br></h1>
+                    <form action="" enctype="multipart/form-data" method="post">{% csrf_token %}
+                    <div class="input.#id-photo" style="margin-left: 50%"></div>
+                    {{ form.as_p }}
+                            <button type="submit" class="btn ui-button-icon-primary">
+                                Добавить
+                            </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Форум читателей</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'Bootstrap/css/bootstrap.css' %}?20200111">
+    <link rel="stylesheet" href="{% static 'Bootstrap/css/font-awesome.min.css' %}?20200111">
+    <link type="text/css" rel="stylesheet" href="{% static 'Bootstrap/css/main.css' %}?20200111">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="{% static 'Bootstrap/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'Bootstrap/js/jquery-3.2.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'Bootstrap/js/alight_0.12.last.min.js' %}"></script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="{% url 'main_url' %}">Форум читателей</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                {% if request.user.is_authenticated %}
+                    {% if request.user.is_staff %}
+                    <li><a href="/admin/">Администрирование </a></li>
+                        {% endif %}
+                {% endif %}
+                    <li><a href="{% url 'list_books_url' %}">Книги</a></li>
+                    <li><a href="{% url 'reader_url' %}">Читатели</a></li>
+                    <li>
+                        <div class="dropdown">
+                            <button class="dropdown-toggle" data-toggle="dropdown">
+                                <img src="{% static "images/login.png" %}" width="30" height="30" alt=""/>
+                            </button>
+                            <div class="dropdown-content">
+                                {% if request.user.is_authenticated %}
+                                    <span>Здравствуйте, {{ request.user.username }}</span>
+                                    <a href="{% url 'logout_url' %}">Выйти</a>
+                                {% else %}
+                                    <a href="{% url 'login_url' %}">Вход</a>
+
+                                    <a href="{% url 'registration2_url' %}">Регистрация</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    {% block body1 %}{% endblock %}
+</body>
+</html>

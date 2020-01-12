@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block body1 %}
+
+<link rel="stylesheet" href="http://bootstraptema.ru/snippets/slider/2016/cbpFWSlider/cbpFWSlider.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="http://bootstraptema.ru/snippets/slider/2016/cbpFWSlider/cbpFWSlider.min.js"></script>
+
+<br><br><br>
+
+    <div class="MyHeader">Добро пожаловать! Вы попали на форум читателей различных книг.</div>
+<div class="row">
+<a href="{% url 'books_url' %}">
+  <div class="column">
+    <div class="card" href="{% url 'books_url' %}">
+      <h3>Новая книга</h3>
+      <p>Добавить книгу на сайт</p>
+    </div>
+  </div>
+</a>
+    <a href="{% url 'reader_url' %}">
+  <div class="column">
+    <div class="card">
+      <h3>Читатели</h3>
+      <p>Посмотреть список читателей</p>
+    </div>
+  </div>
+        </a>
+<a href="{% url 'list_books_url' %}">
+  <div class="column">
+    <div class="card">
+      <h3>Книги</h3>
+      <p>Посмотреть список книг</p>
+    </div>
+  </div>
+        </a>
+</div>
+
+
+<script>
+$( function() {
+$( '#cbp-fwslider' ).cbpFWSlider();});
+</script>
+
+
+{% endblock %}
